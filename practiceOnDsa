@@ -87,3 +87,149 @@ public class Solution {
 }
 link:https://www.hackerrank.com/challenges/java-2d-array/submissions/code/337008108
 
+Question 3: Java Subarray
+
+Skill Mapping: Basic
+
+Description: Solve the HackerRank Problem
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner scanner = new Scanner(System.in);
+
+        // Read the size of the array
+        int size = scanner.nextInt();
+        int[] arr = new int[size];
+
+        // Read the elements of the array
+        for (int i = 0; i < size; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        // Count the number of negative subarrays
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            int sum = 0;
+            for (int j = i; j < size; j++) {
+                sum += arr[j];
+                if (sum < 0) {
+                    count++;
+                }
+            }
+        }
+
+        // Print the result
+        System.out.println(count);
+
+        scanner.close();
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    }
+}
+link:https://www.hackerrank.com/challenges/java-negative-subarray/submissions/code/336991405
+
+
+Question 4: Java Arraylist
+
+Skill Mapping: Basic
+
+Description: Solve the HackerRank Problem
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+       int n = sc.nextInt();
+    //int i = 0;
+    List<Integer[]> list = new ArrayList<>(n);
+    for( int i = 0;i < n; i++){
+        int innerList = sc.nextInt();
+        Integer[] arr= new Integer[innerList];
+        for(int j = 0; j < innerList ; j++){
+            arr[j] = sc.nextInt();
+        }
+        list.add( (Integer[]) arr);
+    }
+    int queriesSize = sc.nextInt();
+    for(int i = 0; i < queriesSize; i++){
+        int element = sc.nextInt();
+        int position = sc.nextInt();
+        int number;
+        try{
+             number = list.get(element - 1)[position - 1];
+            System.out.println(number);
+        }
+        catch(Exception e){
+            System.out.println("ERROR!");
+        }
+    }
+}
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    }
+
+link:https://www.hackerrank.com/challenges/java-arraylist/submissions/code/337024772
+
+Question 5: Java 1D Array (Part 2)
+
+Skill Mapping: Basic
+
+Description: Solve the HackerRank Problem
+
+import java.util.*;
+
+public class Solution {
+
+    public static boolean canWin(int leap, int[] game) {
+        
+         // Return true if you can win the game; otherwise, return false.
+    return isCheck( leap, game, 0);    
+}
+
+public static boolean isCheck (int leap, int[] game, int i){
+    if ( i >= game.length){
+        return true;
+    }
+    if ( i<0 || game[i] ==1){
+        return false;
+    }
+    game[i] = 1;
+
+    if(isCheck(leap, game, i + leap) || isCheck(leap, game, i + 1) || isCheck(leap, game, i - 1))
+    return true;
+    else
+    return false;
+        // Return true if you can win the game; otherwise, return false.
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int q = scan.nextInt();
+        while (q-- > 0) {
+            int n = scan.nextInt();
+            int leap = scan.nextInt();
+            
+            int[] game = new int[n];
+            for (int i = 0; i < n; i++) {
+                game[i] = scan.nextInt();
+            }
+
+            System.out.println( (canWin(leap, game)) ? "YES" : "NO" );
+        }
+        scan.close();
+    }
+}
+
+link: https://www.hackerrank.com/challenges/java-1d-array/submissions/code/337029279
+
+
