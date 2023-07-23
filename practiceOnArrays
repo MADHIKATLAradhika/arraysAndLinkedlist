@@ -1,0 +1,781 @@
+1.Question 1: Cumulative Multiple of an Array with exception handling
+
+Skill Mapping: Basic
+
+Description: Consider an Array with N number of integers.
+
+Task 1- WAP in Java to calculate cumulative multiple at each index.
+
+Task 2 – Push the result into the same Array and Print.
+
+Task 3 - Handle the exceptions in program
+
+Sample input: arrNum = [5, 3, 4, 2, 0, 8]
+
+Output:- arrNum = [5, 15, 60, 120, 0, 0]
+
+Explanation:- arrNum[0] -> C.M. = 5
+
+arrNum[1] -> C.M. = 5 x 3
+
+arrNum[2] -> C.M. = 5 x 3 x 4
+
+arrNum[3] -> C.M. = 5 x 3 x 4 x 2
+
+arrNum[4] -> C.M. = 5 x 3 x 4 x 2 x 0
+
+arrNum[5] -> C.M. = 5 x 3 x 4 x 2 x 0 x 8
+ans:
+package problems;
+
+import java.util.Scanner;
+import java.util.*;
+
+public class CumulativeArray {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter size of the array: ");
+		int n = sc.nextInt();
+		ArrayList<Integer> al =new ArrayList<>();
+		for(int i=0;i<n;i++) {
+		   int k=sc.nextInt();
+		   al.add(k);
+	}
+		int sum=1;
+		try {
+		for(int i=0;i<n;i++) {
+			sum *= al.get(i);
+			al.set(i, sum);
+		}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("Cumulative multiple array is : "+al);
+		
+		}
+
+}
+
+Question 2: Find missing numbers in array -
+
+Skill Mapping: Basic
+
+Description: Consider an array with N number of consecutive integers, in which few numbers are missing. Find and list down these missing numbers using Java.
+
+Sample input: arrNum = {1, 2, 4, 5, 6}
+ans:
+package problems;
+
+import java.util.Scanner;
+import java.util.*;
+
+public class MissingElement {
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		System.out.println("Enter size of array : ");
+		int n=sc.nextInt();
+		int[] arr = new int[n];
+		ArrayList<Integer> al = new ArrayList<>();
+		for(int i=0;i<n;i++)
+			arr[i]=sc.nextInt();
+	
+	for(int i = 0;i < n-1;i++) {
+		if((arr[i]+1 != arr[i+1])) {
+			al.add(arr[i]+1);
+			
+		}
+	}
+	System.out.println(al);
+
+}
+}
+
+
+Output: 3
+
+Sample input: arrNum = {1, 2, 3, 5, 6, 8, 10, 11, 14}
+
+Output: 4, 7, 9, 12, 13
+
+Question 3: Find the count of singulars in array -
+
+Skill Mapping: Expert
+
+Description: Consider data with assorted details of socks pair IDs. Each element in the array represents a number of similar pairs. You will have to find out how many singular socks are present which do not have any pair left.
+
+Sample input: arrNum = {10, 20, 20, 10, 10, 30, 50, 10, 20}
+
+Output: Count of singular socks = 3
+
+Explanation : Socks Id - 10: total count 4 => Two pairs of socks - no singular left
+
+Socks Id - 20: total count 3 => One pair of socks - 1 singular left
+
+Socks Id - 30: total count 1 => No pair of socks - 1 singular left
+
+Socks Id - 50: total count 1 => No pair of socks - 1 singular left
+
+So, Total number of Singular socks = 3
+package problems;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class CountingSingulars {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter size of the array : ");
+		int n = sc.nextInt();
+		int arr[] = new int[n];
+		for(int i=0;i<n;i++) 
+			arr[i]=sc.nextInt();
+		System.out.println();
+		System.out.println("No of singular elements are : "+countSingularSocks(arr,n));
+		}
+		public static int countSingularSocks(int[] arr,int n) {
+		        // Sort the array in ascending order
+		        Arrays.sort(arr);
+
+		        int singularCount = 0;
+		        int currentSockId = arr[0];
+		        int currentSingularCount = 1;
+
+		        // Count the number of singular socks while traversing the sorted array
+		        for (int i = 1; i < n; i++) {
+		            if (arr[i] == currentSockId) {
+		                currentSingularCount++;
+		            } else {
+		                if (currentSingularCount >= 1 && currentSingularCount % 2 != 0) {
+		                    singularCount++;
+		                    }
+		               
+		                currentSingularCount = 1;
+		            }
+		            currentSockId = arr[i];
+		        }
+
+		        // Check the last sock ID count
+		        if (currentSingularCount == 1 || currentSingularCount % 2 != 0) {
+		            singularCount++;
+		        }
+
+		        return singularCount;
+		    }
+	}
+
+	Question 4: Java Subarray
+
+Skill Mapping: Basic
+
+Description: Solve the HackerRank Problem given as a link below -
+
+https://www.hackerrank.com/challenges/java-negative-subarray/problem
+
+ans:
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner scanner = new Scanner(System.in);
+
+        // Read the size of the array
+        int size = scanner.nextInt();
+        int[] arr = new int[size];
+
+        // Read the elements of the array
+        for (int i = 0; i < size; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        // Count the number of negative subarrays
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            int sum = 0;
+            for (int j = i; j < size; j++) {
+                sum += arr[j];
+                if (sum < 0) {
+                    count++;
+                }
+            }
+        }
+
+        // Print the result
+        System.out.println(count);
+
+        scanner.close();
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    }
+}
+link:https://www.hackerrank.com/challenges/java-negative-subarray/submissions/code/336991405
+
+Question 5: Merge and Sort the elements in two Linked-List
+
+Skill Mapping: Intermediate
+
+Description: Consider two Linked-List with N number of integers in Data-Node respectively.
+
+Task 1- WAP in Java to merge both Linked-Lists.
+
+Task 2 - Sort the output Linked-List basis of its Data-Node in ascending order.
+
+Sample input: Linked-List-1:- 25->35->12->4->36->48
+
+Linked-List-2:- 8->32->22->45->63->49
+ans:
+package problems;
+
+import java.util.Scanner;
+class Node {
+    int data;
+    Node next;
+
+    public Node() {
+        this.next = null;
+    }
+}
+
+public class MergingOfLinkedList {
+     
+     Node head=null;
+	public static Node mergeLinkedLists(Node head1, Node head2) {
+       
+        Node mergedHead=new Node();
+        // Dummy head to simplify merging
+        Node current = mergedHead;
+
+        while (head1 != null && head2 != null) {
+            if (head1.data < head2.data) {
+                current.next = head1;
+                head1 = head1.next;
+            } else {
+                current.next = head2;
+                head2 = head2.next;
+            }
+            current = current.next;
+        }
+
+        // Attach remaining nodes of linked list 1 (if any)
+        if (head1 != null) {
+            current.next = head1;
+        }
+
+        // Attach remaining nodes of linked list 2 (if any)
+        if (head2 != null) {
+            current.next = head2;
+        }
+
+        return mergedHead.next; // Skip the dummy head and return the merged list
+    }
+	
+
+    public static Node mergeSortLinkedList(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Split the list into two halves
+        Node middle = getMiddle(head);
+        Node nextOfMiddle = middle.next;
+        middle.next = null;
+
+        // Apply merge sort recursively on the two halves
+        Node left = mergeSortLinkedList(head);
+        Node right = mergeSortLinkedList(nextOfMiddle);
+
+        // Merge the two sorted halves
+        return mergeLinkedLists(left, right);
+    }
+
+    // Helper function to find the middle node of the linked list
+    private static Node getMiddle(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node slow = head;
+        Node fast = head.next;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    // Helper function to print the linked list
+    public static void printLinkedList(Node head) {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.print("null\n");
+    }
+    public void insertingnode(int data){
+        Node node= new Node();
+        node.data= data;
+        Node current=this.head;
+        if (this.head==null){
+            this.head=node;
+            this.head.next= null;
+           
+            
+            
+        }else{
+            while(current.next!=null){
+                current=current.next;
+            }
+            current.next=node;
+            node.next=null;
+            
+        }
+       }
+    public static void main(String[] args) {
+        // Sample input linked lists
+       MergingOfLinkedList ml1 = new MergingOfLinkedList();
+       System.out.println("Enter how many elements want in List1: ");
+       Scanner sc=new Scanner(System.in);
+       int n1 = sc.nextInt();
+       System.out.println("Enter items in list1: ");
+       for(int i=0;i<n1;i++) {
+    	   int data=sc.nextInt();
+    	   ml1.insertingnode(data);
+       }
+       System.out.println("Enter how many elements want in List2: ");
+       MergingOfLinkedList ml2 = new MergingOfLinkedList();
+       int n2 = sc.nextInt();
+       System.out.println("Enter items in list2: ");
+       for(int i=0;i<n2;i++) {
+    	   int data=sc.nextInt();
+    	   ml2.insertingnode(data);
+       }
+       // Merge and sort the linked lists
+        Node mergedHead = mergeSortLinkedList(mergeLinkedLists(ml1.head,ml2.head));
+
+        // Output the sorted linked list
+        printLinkedList(mergedHead);
+    }
+}
+
+
+Question 6: Remove Duplicates from Linked-List
+
+Skill Mapping: Intermediate
+
+Description: Consider a Linked-List with N number of repeated integers in Data-Node.
+
+Task - WAP in Java to remove the repeated integer numbers from Linked-List.
+
+Sample input: Linked-List:- 2->5->12->2->3->5->1->2->5->5
+
+Output:- 2->5->12->3->1
+ans:
+package problems;
+import java.util.*;
+
+public class RemoveDuplicates {
+	class Node {
+	    int data;
+	    Node next;
+
+	    Node(int data) {
+	        this.data = data;
+	        this.next = null;
+	    }
+	}
+	    Node head;
+    public void removeDuplicates() {
+	        if (head == null) {
+	            return;
+	        }
+           
+	        ArrayList<Integer> uniqueElements = new ArrayList<>();
+	        Node current = head;
+	        Node previous = null;
+
+	        while (current != null) {
+	            if (uniqueElements.contains(current.data)) {
+	                previous.next = current.next;
+	            } else {
+	                uniqueElements.add(current.data);
+	                previous = current;
+	            }
+	            current = current.next;
+	        }
+	    }
+
+	    void insert(int data) {
+	        Node newNode = new Node(data);
+	        if (head == null) {
+	            head = newNode;
+	        } else {
+	            Node current = head;
+	            while (current.next != null) {
+	                current = current.next;
+	            }
+	            current.next = newNode;
+	        }
+	    }
+
+	    void display() {
+	        Node current = head;
+	        while (current != null) {
+	            System.out.print(current.data + "->");
+	            current = current.next;
+	        }
+	        System.out.println();
+	    }
+	
+
+	
+	    public static void main(String[] args) {
+	        RemoveDuplicates linkedList = new RemoveDuplicates();
+	        Scanner sc=new Scanner(System.in);
+	        System.out.println("Enter how many items do you want to enter: ");
+	        int n= sc.nextInt();
+	        for(int i=0;i<n;i++) {
+	        	int data=sc.nextInt();
+	        	linkedList.insert(data);
+	        	
+	        }
+	        System.out.println("Original linked list:");
+	        linkedList.display();
+
+	        linkedList.removeDuplicates();
+
+	        System.out.println("Linked list after removing duplicates:");
+	        linkedList.display();
+	    }
+	}
+
+
+Question 7: Longest Palindromic Substring
+
+Skill Mapping: Medium
+
+Description: Solve the LeetCode Problem given as a link below -
+
+https://leetcode.com/problems/longest-palindromic-substring/
+class Solution {
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        if(n==1) return s;
+
+        int start = 0, end = 0;
+
+        int left=0, right=0;
+        for(int i=0; i<s.length(); i++){
+
+            left = i-1;
+            right = i+1;
+            while(left>=0 && right<n && s.charAt(left)==s.charAt(right)){
+                if(right-left+1 > end-start+1){
+                    start = left;
+                    end = right;
+                }
+                left--; right++;
+            }
+
+            left = i;
+            right = i+1;
+            while(left>=0 && right<n && s.charAt(left)==s.charAt(right)){
+                if(right-left+1 > end-start+1){
+                    start = left;
+                    end = right;
+                }
+                left--; right++;
+            }
+        }
+        return s.substring(start, end+1);
+        
+        
+    }
+}
+
+Question 8: Java Stack
+
+Skill Mapping: Basic
+
+Description: Solve the HackerRank Problem given as a link below -
+
+https://www.hackerrank.com/challenges/java-stack/problem
+
+ans:
+import java.util.*;
+class Solution{
+	
+	public static void main(String []argh)
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		while (sc.hasNext()) {
+            String input = sc.next();
+            System.out.println(isBalanced(input));
+        }
+    }
+
+    public static boolean isBalanced(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                char top = stack.pop();
+                if ((ch == ')' && top != '(') || (ch == '}' && top != '{') || (ch == ']' && top != '[')) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
+		
+	}
+}
+link:https://www.hackerrank.com/challenges/java-stack/submissions/code/336992383
+
+Question 9: Java Dequeue
+
+Skill Mapping: Basic
+
+Description: Solve the HackerRank Problem given as a link below -
+
+https://www.hackerrank.com/challenges/java-dequeue/problem
+ans:
+import java.util.*;
+    public class test {
+        public static int maxUniqueSubarrays(int[] arr, int M) {
+        int maxUnique = 0;
+        Set<Integer> uniqueElements = new HashSet<>();
+        Deque<Integer> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < M; i++) {
+            if (uniqueElements.add(arr[i])) {
+                maxUnique = Math.max(maxUnique, uniqueElements.size());
+            }
+            deque.addLast(arr[i]);
+        }
+
+        for (int i = M; i < arr.length; i++) {
+            int removedElement = deque.removeFirst();
+            if (!deque.contains(removedElement)) {
+                uniqueElements.remove(removedElement);
+            }
+
+            if (uniqueElements.add(arr[i])) {
+                maxUnique = Math.max(maxUnique, uniqueElements.size());
+            }
+            deque.addLast(arr[i]);
+        }
+
+        return maxUnique;
+    }
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            Deque deque = new ArrayDeque<>();
+             
+             
+            
+            int n = in.nextInt();
+            int m = in.nextInt();
+            
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = in.nextInt();
+               
+            }
+            in.close();
+
+        int result = maxUniqueSubarrays(arr, m);
+        System.out.println(result);
+        }
+    }
+link:https://www.hackerrank.com/challenges/java-dequeue/submissions/code/336993954
+
+Question 10: Java Priority Queue
+
+Skill Mapping: Basic
+
+Description: Solve the HackerRank Problem given as a link below -
+
+https://www.hackerrank.com/challenges/java-priority-queue/problem
+ans:
+import java.util.*;
+class Student implements Comparable<Student> {
+    private final int id;
+    private final String name;
+    private final double cgpa;
+
+    public Student(int id, String name, double cgpa) {
+        this.id = id;
+        this.name = name;
+        this.cgpa = cgpa;
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getCGPA() {
+        return cgpa;
+    }
+
+    @Override
+    public int compareTo(Student other) {
+        if (this.cgpa != other.cgpa) {
+            return Double.compare(other.cgpa, this.cgpa); // Higher CGPA comes first
+        } else if (!this.name.equals(other.name)) {
+            return this.name.compareTo(other.name); // Names in ascending order
+        } else {
+            return Integer.compare(this.id, other.id); // IDs in ascending order
+        }
+    }
+}
+
+class Priorities {
+    public List<Student> getStudents(List<String> events) {
+        PriorityQueue<Student> queue = new PriorityQueue<>();
+        List<Student> studentsYetToBeServed = new ArrayList<>();
+
+        for (String event : events) {
+            String[] parts = event.split(" ");
+            String type = parts[0];
+
+            if (type.equals("ENTER")) {
+                String name = parts[1];
+                double cgpa = Double.parseDouble(parts[2]);
+                int id = Integer.parseInt(parts[3]);
+                Student student = new Student(id, name, cgpa);
+                queue.add(student);
+            } else if (type.equals("SERVED")) {
+                queue.poll(); // Remove the highest priority student
+            }
+        }
+
+        // Add the remaining students to the list
+        while (!queue.isEmpty()) {
+            studentsYetToBeServed.add(queue.poll());
+        }
+
+        return studentsYetToBeServed;
+    }
+}
+link:https://www.hackerrank.com/challenges/java-priority-queue/submissions/code/336989812
+
+Question 11: Swap Nodes in Pairs
+
+Skill Mapping: Basic
+
+Description: Solve the LeetCode Problem given as a link below -
+
+https://leetcode.com/problems/swap-nodes-in-pairs/
+ans:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }        
+        ListNode ans = new ListNode(0);
+        ans.next = head;       
+        ListNode temp = head;
+        ListNode temp1 = ans;
+        
+        while (temp != null && temp.next != null) {
+            ListNode forw = temp.next;
+            temp.next = forw.next;
+            forw.next = temp;
+            temp1.next = forw;
+            temp1 = temp;
+            temp = temp.next;
+        }
+        
+        return ans.next;
+        
+    }
+}
+Question 12: Reverse Nodes in k-Group
+
+Skill Mapping: Basic
+
+Description: Solve the LeetCode Problem given as a link below -
+
+https://leetcode.com/problems/reverse-nodes-in-k-group/
+ans:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(-1,head);
+        ListNode temp=head;
+        ListNode start=dummy;
+        int i=0;
+        while(temp!=null) {
+            i++;
+            if(i%k==0) {
+                start=reverse(start,temp.next);
+                temp=start.next;
+            } else {
+                temp=temp.next;
+            }
+            
+        }
+        return dummy.next;
+    }
+
+    private ListNode reverse(ListNode start,ListNode end) {
+        ListNode prev=null;
+        ListNode head=start.next;
+        ListNode first = head;
+        while(head!=end) {
+            ListNode next=head.next;
+            head.next=prev;
+            prev=head;
+            head=next;
+        }
+        start.next=prev;
+        first.next=head;
+        return first;
+        
+    }
+}
+
+
+
+	
+
+
